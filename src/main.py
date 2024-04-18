@@ -57,19 +57,32 @@ for i in range (0, 3, 1):
 
 # Now 'all_games' contains all the concatenated results
 for game in all_games:
-    print(f"Game ID: {game.id}, Name: {game.name}, rating: {game.rating}, genres{game.genres}")
+    print(f"Game ID: {game.id}, Name: {game.name}, rating: {game.rating}")
 
 # You can process the combined data further as needed
 
-var = input("input a platform name: ")
 byte_array = wrapper.api_request(
     'platforms.pb',
-    f'fields id, name; offset 0; where name="{var}";'
+    'fields id, name; offset 0;'
 )
 
 platform_message = PlatformResult()
 platform_message.ParseFromString(byte_array) # Fills the protobuf message object with the response
 platforms = platform_message.platforms
+
+next_offset = 10
+while True:
+    byte_array = wrapper.api_request(
+        'platforms.pb',
+        f'fields id, name; offset {next_offset};'
+    )
+    platform_message.ParseFromString(byte_array)
+    if not platform_message.platforms:
+        break  # No more results, exit the loop
+    platforms.extend(platform_message.platforms)  # Add the new results to the list
+    next_offset += 10  # Increase the offset for the next request
+
+MergeSort(platforms, 0, len(platforms) - 1)
 
 for platform in platforms:
     print(f"Platform ID: {platform.id}, Name: {platform.name}")
