@@ -60,3 +60,13 @@ for game in all_games:
 
 # You can process the combined data further as needed
 
+var = input("input a platform name: ")
+byte_array = wrapper.api_request(
+    'platforms.pb',
+    f'fields id, name; offset 0; where name="{var}";'
+)
+all = []
+message = GameResult()
+games_message.ParseFromString(byte_array)
+all.extend(message.games)
+print(all)
