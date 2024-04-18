@@ -3,6 +3,7 @@ from heapsort import HeapSort
 from mergesort import MergeSort
 from igdb.wrapper import IGDBWrapper
 from igdb.igdbapi_pb2 import GameResult
+from igdb.igdbapi_pb2 import PlatformResult
 
 # information for accessing the data base
 ClientID = 'vmqipli3y2vhqnenur94vvzdk8eqhs'
@@ -65,8 +66,10 @@ byte_array = wrapper.api_request(
     'platforms.pb',
     f'fields id, name; offset 0; where name="{var}";'
 )
-all = []
-message = GameResult()
-games_message.ParseFromString(byte_array)
-all.extend(message.games)
-print(all)
+
+platform_message = PlatformResult()
+platform_message.ParseFromString(byte_array) # Fills the protobuf message object with the response
+platforms = platform_message.platforms
+
+for platform in platforms:
+    print(f"Platform ID: {platform.id}, Name: {platform.name}")
