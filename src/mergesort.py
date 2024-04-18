@@ -16,16 +16,8 @@ def merge(my_list, l, m, r):
     n2 = r - m
 
     # define arrays to store partitions
-    L = []
-    R = []
-
-    # fill out partition left
-    for i in range(0, n1):
-        L.append(my_list[l+i])
-
-    # fill out partition right
-    for i in range(0, n2):
-        R.append(my_list[m + 1 + i])
+    L = my_list[l : l + n1]
+    R = my_list[m + 1 : m + 1 + n2]
     
     # 
     i = 0

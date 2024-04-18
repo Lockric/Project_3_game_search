@@ -66,9 +66,10 @@ byte_array = wrapper.api_request(
     'fields id, name; offset 0;'
 )
 
+platforms = []
 platform_message = PlatformResult()
 platform_message.ParseFromString(byte_array) # Fills the protobuf message object with the response
-platforms = platform_message.platforms
+platforms.extend(platform_message.platforms)
 
 next_offset = 10
 while True:
