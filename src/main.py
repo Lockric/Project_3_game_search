@@ -4,7 +4,6 @@ from mergesort import MergeSort
 from igdb.wrapper import IGDBWrapper
 from igdb.igdbapi_pb2 import GameResult
 
-
 # information for accessing the data base
 ClientID = 'vmqipli3y2vhqnenur94vvzdk8eqhs'
 ClientSecret = 'gphrec7hscngppx4heaoiukjsnkclc'
@@ -33,7 +32,7 @@ all_games = []
 # Initial API request (you've already done this)
 byte_array = wrapper.api_request(
     'games.pb',
-    'fields id, name, rating; offset 0; where genres=12;'
+    'fields id, name, rating, genres; offset 0; where name="Spider-Man";'
 )
 games_message = GameResult()
 games_message.ParseFromString(byte_array)
@@ -47,7 +46,7 @@ next_offset = 10
 for i in range (0, 3, 1):
     byte_array = wrapper.api_request(
         'games.pb',
-        f'fields id, name, rating; offset {next_offset}; where genres=12;'
+        f'fields id, name, rating, genres; offset {next_offset}; where name="Spider-Man";'
     )
     games_message.ParseFromString(byte_array)
     if not games_message.games:
@@ -57,6 +56,7 @@ for i in range (0, 3, 1):
 
 # Now 'all_games' contains all the concatenated results
 for game in all_games:
-    print(f"Game ID: {game.id}, Name: {game.name}, rating: {game.rating}")
+    print(f"Game ID: {game.id}, Name: {game.name}, rating: {game.rating}, genres{game.genres}")
 
 # You can process the combined data further as needed
+

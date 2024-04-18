@@ -5,10 +5,10 @@ def heapify(arr, n , i):
     left = 2 * i + 1
     right = 2 * i + 2
     # check if the left child of root exists and is greater than root
-    if left < n and arr[i] < arr[left]:
+    if left < n and arr[i].id < arr[left].id:
         largest = left
      # check if the right child of root exists and is greater than root
-    if right < n and arr[largest] < arr[right]:
+    if right < n and arr[largest].id < arr[right].id:
         largest = right
     # change root when needed
     if largest != i:
