@@ -3,6 +3,8 @@ from heapsort import HeapSort
 from mergesort import MergeSort
 from igdb.wrapper import IGDBWrapper
 from igdb.igdbapi_pb2 import GameResult
+from igdb.igdbapi_pb2 import PlatformResult
+from igdb.igdbapi_pb2 import GenreResult
 
 
 def get_wrapper():
