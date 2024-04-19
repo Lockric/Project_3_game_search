@@ -3,9 +3,7 @@ import pygame.freetype
 from display_functions import draw_button
 from display_functions import draw_text
 
-def start(screen):
-    config = []
-
+def display(screen):
     font_title = pygame.freetype.SysFont(None, 35)
     font_message = pygame.freetype.SysFont(None, 25)
     clock = pygame.time.Clock()
