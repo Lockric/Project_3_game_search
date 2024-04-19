@@ -26,7 +26,7 @@ def merge(my_list, l, m, r):
 
     # organize left and right partitions back into the list
     while i < n1 and j < n2:
-        if L[i].id <= R[j].id:
+        if L[i].rating >= R[j].rating:
             my_list[k] = L[i]
             i += 1
         else:
