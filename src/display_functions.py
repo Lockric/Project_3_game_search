@@ -7,3 +7,7 @@ def draw_text(screen, text, font, color, rect):
 def draw_button(screen, text, font, color, rect):
     pygame.draw.rect(screen, color, rect)
     draw_text(screen, text, font, (255, 255, 255), rect.topleft)
+
+def draw_box(screen, color, rect):
+    pygame.draw.rect(screen, color, rect)
+    

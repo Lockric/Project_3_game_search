@@ -2,6 +2,8 @@ import pygame
 import pygame.freetype
 from display_functions import draw_button
 from display_functions import draw_text
+from display_functions import draw_box
+import tkinter as tk
 
 def show_results_genre(genre):
     result_screen = pygame.display.set_mode((600, 700))
@@ -9,8 +11,9 @@ def show_results_genre(genre):
     clock = pygame.time.Clock()
     done = False
 
-    heapsort_button = pygame.Rect(137, 25, 150, 50)
-    mergesort_button = pygame.Rect(313, 25, 150, 50)
+    heapsort_button = pygame.Rect(137, 100-15, 150, 50)
+    mergesort_button = pygame.Rect(313, 100-15, 150, 50)
+    box = pygame.Rect(00, 00, 600, 145)
 
     while not done:
         for event in pygame.event.get():
@@ -22,8 +25,9 @@ def show_results_genre(genre):
                 elif mergesort_button.collidepoint(event.pos):
                     print("Merge Sort button clicked")
                
-        result_screen.fill((154, 170, 217))
-        draw_text(result_screen, f"Results for {genre}:", font_message, (0, 0, 0), (182, 100))
+        result_screen.fill((81, 90, 115))
+        draw_box(result_screen, (154, 170, 217), box)
+        draw_text(result_screen, f"Results for {genre}:", font_message, (0, 0, 0), (182, 50-15))
         draw_button(result_screen, "Heap Sort", font_message, (67, 45, 115), heapsort_button)
         draw_button(result_screen, "Merge Sort", font_message, (67, 45, 115), mergesort_button)
         pygame.display.flip()
@@ -35,8 +39,10 @@ def show_results_platform(platform):
     clock = pygame.time.Clock()
     done = False
 
-    heapsort_button = pygame.Rect(137, 25, 150, 50)
-    mergesort_button = pygame.Rect(313, 25, 150, 50)
+    heapsort_button = pygame.Rect(137, 100-15, 150, 50)
+    mergesort_button = pygame.Rect(313, 100-15, 150, 50)
+    box = pygame.Rect(00, 00, 600, 145)
+
 
     while not done:
         for event in pygame.event.get():
@@ -48,12 +54,42 @@ def show_results_platform(platform):
                 elif mergesort_button.collidepoint(event.pos):
                     print("Merge Sort button clicked")
 
-        result_screen.fill((154, 170, 217))
-        draw_text(result_screen, f"Results for {platform}:", font_message, (0, 0, 0), (182, 100))
+        result_screen.fill((81, 90, 115))
+        draw_box(result_screen, (154, 170, 217), box)
+        draw_text(result_screen, f"Results for {platform}:", font_message, (0, 0, 0), (182, 50-15))
         draw_button(result_screen, "Heap Sort", font_message, (67, 45, 115), heapsort_button)
         draw_button(result_screen, "Merge Sort", font_message, (67, 45, 115), mergesort_button)
         pygame.display.flip()
         clock.tick(30)        
+
+def show_results_name(name):
+    result_screen = pygame.display.set_mode((600, 700))
+    font_message = pygame.freetype.SysFont(None, 25)
+    clock = pygame.time.Clock()
+    done = False
+
+    heapsort_button = pygame.Rect(137, 100-15, 150, 50)
+    mergesort_button = pygame.Rect(313, 100-15, 150, 50)
+    box = pygame.Rect(00, 00, 600, 145)
+
+
+    while not done:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                done = True
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if heapsort_button.collidepoint(event.pos):
+                    print("Heap Sort button clicked")
+                elif mergesort_button.collidepoint(event.pos):
+                    print("Merge Sort button clicked")
+
+        result_screen.fill((81, 90, 115))
+        draw_box(result_screen, (154, 170, 217), box)
+        draw_text(result_screen, f"Results for {name}:", font_message, (0, 0, 0), (182, 50-15))
+        draw_button(result_screen, "Heap Sort", font_message, (67, 45, 115), heapsort_button)
+        draw_button(result_screen, "Merge Sort", font_message, (67, 45, 115), mergesort_button)
+        pygame.display.flip()
+        clock.tick(30)
 
 def start(screen):
     config = []
@@ -113,6 +149,7 @@ def start(screen):
                 if active:
                     if event.key == pygame.K_RETURN:
                         print(text)
+                        show_results_name(text)
                         text = ''
                     elif event.key == pygame.K_BACKSPACE:
                         text = text[:-1]
