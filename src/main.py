@@ -10,12 +10,7 @@ def main():
     screen = pygame.display.set_mode((600, 700))
 
     while True:
-        config = start(screen)
-        if config.quit == True: 
-            break
-        else:
-            display()
-            break
+        start(screen)
 
 
     pygame.quit()
