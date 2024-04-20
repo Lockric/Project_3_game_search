@@ -1,8 +1,6 @@
 import pygame
 import pygame.freetype
-from display_functions import draw_button
-from display_functions import draw_text
-from display_functions import draw_box
+from display_functions import *
 
 from api_call_back import *
 from heapsort import HeapSort
@@ -101,9 +99,10 @@ def show_results_name(name):
                     HeapSort(results)
                 elif mergesort_button.collidepoint(event.pos):
                     print("Merge Sort button clicked")
-                    MergeSort(results)
+                    MergeSort(results, 0, len(results) - 1)
 
         result_screen.fill((81, 90, 115))
+        build_string_results(result_screen, results, font_message, (255, 255, 255), (184, 300))
         draw_box(result_screen, (154, 170, 217), box)
         draw_text(result_screen, f"Results for {name}:", font_message, (0, 0, 0), (182, 50-15))
         draw_button(result_screen, "Heap Sort", font_message, (67, 45, 115), heapsort_button)
@@ -112,8 +111,6 @@ def show_results_name(name):
         clock.tick(30)
 
 def start(screen):
-    config = []
-
     font_title = pygame.freetype.SysFont(None, 35)
     font_message = pygame.freetype.SysFont(None, 25)
     clock = pygame.time.Clock()

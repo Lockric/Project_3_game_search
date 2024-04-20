@@ -11,8 +11,12 @@ def draw_button(screen, text, font, color, rect):
 def draw_box(screen, color, rect):
     pygame.draw.rect(screen, color, rect)
 
-def build_string_results(results):
-    pass
+def build_string_results(screen, results, font, color, rect):
+    text = ''
 
-def display_results(resultsUi, offset):
-    pass
+    pos = list(rect)
+
+    for item in results:
+        draw_text(screen, f'{item.name}: rating = {item.rating:.2f}', font, color, tuple(pos))
+        pos[1] += 25
+    return text
