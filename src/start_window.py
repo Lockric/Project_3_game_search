@@ -4,6 +4,10 @@ from display_functions import draw_button
 from display_functions import draw_text
 from display_functions import draw_box
 
+from api_call_back import *
+from heapsort import HeapSort
+from mergesort import MergeSort
+
 def show_results_genre(genre):
     result_screen = pygame.display.set_mode((600, 700))
     font_message = pygame.freetype.SysFont(None, 25)
@@ -14,6 +18,9 @@ def show_results_genre(genre):
     mergesort_button = pygame.Rect(313, 100-15, 150, 50)
     box = pygame.Rect(00, 00, 600, 145)
 
+    wrapper = get_wrapper()
+    results = get_game_by_genre(wrapper, genre, 5)
+
     while not done:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -21,8 +28,10 @@ def show_results_genre(genre):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if heapsort_button.collidepoint(event.pos):
                     print("Heap Sort button clicked")
+                    HeapSort(results)
                 elif mergesort_button.collidepoint(event.pos):
                     print("Merge Sort button clicked")
+                    MergeSort(results)
                
         result_screen.fill((81, 90, 115))
         draw_box(result_screen, (154, 170, 217), box)
@@ -42,6 +51,8 @@ def show_results_platform(platform):
     mergesort_button = pygame.Rect(313, 100-15, 150, 50)
     box = pygame.Rect(00, 00, 600, 145)
 
+    wrapper = get_wrapper()
+    results = get_game_by_platform(wrapper, platform, 5)
 
     while not done:
         for event in pygame.event.get():
@@ -50,8 +61,10 @@ def show_results_platform(platform):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if heapsort_button.collidepoint(event.pos):
                     print("Heap Sort button clicked")
+                    HeapSort(results)
                 elif mergesort_button.collidepoint(event.pos):
                     print("Merge Sort button clicked")
+                    MergeSort(results)
 
         result_screen.fill((81, 90, 115))
         draw_box(result_screen, (154, 170, 217), box)
@@ -62,6 +75,7 @@ def show_results_platform(platform):
         clock.tick(30)        
 
 def show_results_name(name):
+
     result_screen = pygame.display.set_mode((600, 700))
     font_message = pygame.freetype.SysFont(None, 25)
     clock = pygame.time.Clock()
@@ -71,6 +85,11 @@ def show_results_name(name):
     mergesort_button = pygame.Rect(313, 100-15, 150, 50)
     box = pygame.Rect(00, 00, 600, 145)
 
+    # Get the results from the API
+    wrapper = get_wrapper()
+    results = get_game_by_name(wrapper, name, 5)
+
+    # build array of result boxes
 
     while not done:
         for event in pygame.event.get():
@@ -79,8 +98,10 @@ def show_results_name(name):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if heapsort_button.collidepoint(event.pos):
                     print("Heap Sort button clicked")
+                    HeapSort(results)
                 elif mergesort_button.collidepoint(event.pos):
                     print("Merge Sort button clicked")
+                    MergeSort(results)
 
         result_screen.fill((81, 90, 115))
         draw_box(result_screen, (154, 170, 217), box)

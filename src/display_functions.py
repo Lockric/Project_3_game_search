@@ -10,4 +10,9 @@ def draw_button(screen, text, font, color, rect):
 
 def draw_box(screen, color, rect):
     pygame.draw.rect(screen, color, rect)
-    
+
+def build_string_results(results):
+    pass
+
+def display_results(resultsUi, offset):
+    pass
