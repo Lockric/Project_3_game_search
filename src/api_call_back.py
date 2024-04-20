@@ -6,7 +6,6 @@ from igdb.igdbapi_pb2 import GameResult
 from igdb.igdbapi_pb2 import PlatformResult
 from igdb.igdbapi_pb2 import GenreResult
 
-
 def get_wrapper():
     # information for accessing the data base
     ClientID = 'vmqipli3y2vhqnenur94vvzdk8eqhs'

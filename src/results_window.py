@@ -1,3 +1,5 @@
+'''
+ENDED UP NOT USING THIS FILE AT ALL
 import pygame
 import pygame.freetype
 from display_functions import draw_button
@@ -71,3 +73,4 @@ def display(screen):
             draw_button(screen, platform[i], font_message, dark_blue, platform_buttons[i])
         pygame.display.flip()
         clock.tick(30)
+'''        

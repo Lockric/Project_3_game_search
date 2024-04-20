@@ -1,3 +1,5 @@
+'''
+NO NEED FOR THIS JUST USED IT FOR TESTING
 from api_call_back import *
 
 if __name__=="__main__":
@@ -7,5 +9,5 @@ if __name__=="__main__":
     print(get_game_by_name(wrapper, "Spider-Man", 5))
     print(get_game_by_platform(wrapper, 48, 5))
     print(get_game_by_genre(wrapper, 5, 5))
-
+'''
 
