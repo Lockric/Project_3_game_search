@@ -3,7 +3,6 @@ import pygame.freetype
 from display_functions import draw_button
 from display_functions import draw_text
 from display_functions import draw_box
-import tkinter as tk
 
 def show_results_genre(genre):
     result_screen = pygame.display.set_mode((600, 700))
@@ -109,9 +108,8 @@ def start(screen):
     done = False
 
     genre_buttons = [pygame.Rect(137, 285 + i*60, 150, 50) for i in range(6)]
-    genres = ["Action", "RPG", "Sports", "Shooter", "Racing", "Strategy"]
+    genres = ["Fighting", "RPG", "Sports", "Shooter", "Racing", "Strategy"]
     
-
     platform_buttons = [pygame.Rect(313, 285 + i*60, 150, 50) for i in range(6)]
     platform = ["PS5", "PS4", "Xbox One", "Xbox Series", "Switch", "PC"]
 
