@@ -9,9 +9,7 @@ def main():
     pygame.display.set_caption("IGDB Project")
     screen = pygame.display.set_mode((600, 700))
 
-    while True:
-        start(screen)
-
+    start(screen)
 
     pygame.quit()
 
