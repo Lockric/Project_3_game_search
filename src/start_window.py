@@ -3,6 +3,58 @@ import pygame.freetype
 from display_functions import draw_button
 from display_functions import draw_text
 
+def show_results_genre(genre):
+    result_screen = pygame.display.set_mode((600, 700))
+    font_message = pygame.freetype.SysFont(None, 25)
+    clock = pygame.time.Clock()
+    done = False
+
+    heapsort_button = pygame.Rect(137, 25, 150, 50)
+    mergesort_button = pygame.Rect(313, 25, 150, 50)
+
+    while not done:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                done = True
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if heapsort_button.collidepoint(event.pos):
+                    print("Heap Sort button clicked")
+                elif mergesort_button.collidepoint(event.pos):
+                    print("Merge Sort button clicked")
+               
+        result_screen.fill((154, 170, 217))
+        draw_text(result_screen, f"Results for {genre}:", font_message, (0, 0, 0), (182, 100))
+        draw_button(result_screen, "Heap Sort", font_message, (67, 45, 115), heapsort_button)
+        draw_button(result_screen, "Merge Sort", font_message, (67, 45, 115), mergesort_button)
+        pygame.display.flip()
+        clock.tick(30)
+
+def show_results_platform(platform):
+    result_screen = pygame.display.set_mode((600, 700))
+    font_message = pygame.freetype.SysFont(None, 25)
+    clock = pygame.time.Clock()
+    done = False
+
+    heapsort_button = pygame.Rect(137, 25, 150, 50)
+    mergesort_button = pygame.Rect(313, 25, 150, 50)
+
+    while not done:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                done = True
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if heapsort_button.collidepoint(event.pos):
+                    print("Heap Sort button clicked")
+                elif mergesort_button.collidepoint(event.pos):
+                    print("Merge Sort button clicked")
+
+        result_screen.fill((154, 170, 217))
+        draw_text(result_screen, f"Results for {platform}:", font_message, (0, 0, 0), (182, 100))
+        draw_button(result_screen, "Heap Sort", font_message, (67, 45, 115), heapsort_button)
+        draw_button(result_screen, "Merge Sort", font_message, (67, 45, 115), mergesort_button)
+        pygame.display.flip()
+        clock.tick(30)        
+
 def start(screen):
     config = []
 
@@ -39,13 +91,24 @@ def start(screen):
                     
                 elif button_genre.collidepoint(event.pos):
                     print("Genre button clicked")
-                    
+
                 elif button_platform.collidepoint(event.pos):
                     print("Platform button clicked")
                     
                 else:
                     active = False
                 color = color_active if active else color_inactive
+
+                for i in range(len(genre_buttons)):
+                    if genre_buttons[i].collidepoint(event.pos):
+                        print(f"{genres[i]} button clicked")
+                        show_results_genre(genres[i])
+
+                for i in range(len(platform_buttons)):
+                    if platform_buttons[i].collidepoint(event.pos):
+                        print(f"{platform[i]} button clicked")
+                        show_results_platform(platform[i])
+
             if event.type == pygame.KEYDOWN:
                 if active:
                     if event.key == pygame.K_RETURN:
