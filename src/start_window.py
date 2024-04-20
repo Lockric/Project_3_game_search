@@ -9,6 +9,7 @@ from mergesort import MergeSort
 def show_results_genre(genre):
     result_screen = pygame.display.set_mode((600, 700))
     font_message = pygame.freetype.SysFont(None, 25)
+    font_results = pygame.freetype.SysFont(None, 15)
     clock = pygame.time.Clock()
     done = False
 
@@ -17,7 +18,7 @@ def show_results_genre(genre):
     box = pygame.Rect(00, 00, 600, 145)
 
     wrapper = get_wrapper()
-    results = get_game_by_genre(wrapper, genre, 5)
+    results = get_game_by_genre(wrapper, genre[1], 5)
 
     while not done:
         for event in pygame.event.get():
@@ -29,11 +30,12 @@ def show_results_genre(genre):
                     HeapSort(results)
                 elif mergesort_button.collidepoint(event.pos):
                     print("Merge Sort button clicked")
-                    MergeSort(results)
+                    MergeSort(results, 0, len(results) - 1)
                
         result_screen.fill((81, 90, 115))
+        build_string_results(result_screen, results, font_results, (255, 255, 255), (5, 148))
         draw_box(result_screen, (154, 170, 217), box)
-        draw_text(result_screen, f"Results for {genre}:", font_message, (0, 0, 0), (182, 50-15))
+        draw_text(result_screen, f"Results for {genre[0]}:", font_message, (0, 0, 0), (182, 50-15))
         draw_button(result_screen, "Heap Sort", font_message, (67, 45, 115), heapsort_button)
         draw_button(result_screen, "Merge Sort", font_message, (67, 45, 115), mergesort_button)
         pygame.display.flip()
@@ -42,6 +44,7 @@ def show_results_genre(genre):
 def show_results_platform(platform):
     result_screen = pygame.display.set_mode((600, 700))
     font_message = pygame.freetype.SysFont(None, 25)
+    font_results = pygame.freetype.SysFont(None, 15)
     clock = pygame.time.Clock()
     done = False
 
@@ -50,7 +53,7 @@ def show_results_platform(platform):
     box = pygame.Rect(00, 00, 600, 145)
 
     wrapper = get_wrapper()
-    results = get_game_by_platform(wrapper, platform, 5)
+    results = get_game_by_platform(wrapper, platform[1], 50)
 
     while not done:
         for event in pygame.event.get():
@@ -62,11 +65,12 @@ def show_results_platform(platform):
                     HeapSort(results)
                 elif mergesort_button.collidepoint(event.pos):
                     print("Merge Sort button clicked")
-                    MergeSort(results)
+                    MergeSort(results, 0, len(results) - 1)
 
         result_screen.fill((81, 90, 115))
+        build_string_results(result_screen, results, font_results, (255, 255, 255), (5, 148))
         draw_box(result_screen, (154, 170, 217), box)
-        draw_text(result_screen, f"Results for {platform}:", font_message, (0, 0, 0), (182, 50-15))
+        draw_text(result_screen, f"Results for {platform[0]}:", font_message, (0, 0, 0), (182, 50-15))
         draw_button(result_screen, "Heap Sort", font_message, (67, 45, 115), heapsort_button)
         draw_button(result_screen, "Merge Sort", font_message, (67, 45, 115), mergesort_button)
         pygame.display.flip()
@@ -76,6 +80,7 @@ def show_results_name(name):
 
     result_screen = pygame.display.set_mode((600, 700))
     font_message = pygame.freetype.SysFont(None, 25)
+    font_results = pygame.freetype.SysFont(None, 15)
     clock = pygame.time.Clock()
     done = False
 
@@ -102,7 +107,7 @@ def show_results_name(name):
                     MergeSort(results, 0, len(results) - 1)
 
         result_screen.fill((81, 90, 115))
-        build_string_results(result_screen, results, font_message, (255, 255, 255), (184, 300))
+        build_string_results(result_screen, results, font_results, (255, 255, 255), (184, 300))
         draw_box(result_screen, (154, 170, 217), box)
         draw_text(result_screen, f"Results for {name}:", font_message, (0, 0, 0), (182, 50-15))
         draw_button(result_screen, "Heap Sort", font_message, (67, 45, 115), heapsort_button)
@@ -126,10 +131,10 @@ def start(screen):
     done = False
 
     genre_buttons = [pygame.Rect(137, 285 + i*60, 150, 50) for i in range(6)]
-    genres = ["Fighting", "RPG", "Sports", "Shooter", "Racing", "Strategy"]
+    genres = [["Fighting", 4], ["RPG", 12], ["Sports", 14], ["Shooter", 5], ["Racing", 10], ["Strategy", 15]]
     
     platform_buttons = [pygame.Rect(313, 285 + i*60, 150, 50) for i in range(6)]
-    platform = ["PS5", "PS4", "Xbox One", "Xbox Series", "Switch", "PC"]
+    platform = [["PS5", 167], ["PS4", 48], ["Xbox One", 49], ["Xbox Series",169], ["Switch", 130], ["PC", 6]]
 
     while not done:
         for event in pygame.event.get():
@@ -183,9 +188,9 @@ def start(screen):
         draw_button(screen, "Platform", font_message, dark_blue, button_platform)   
        
         for i in range(6):
-            draw_button(screen, genres[i], font_message, dark_blue, genre_buttons[i])
+            draw_button(screen, genres[i][0], font_message, dark_blue, genre_buttons[i])
         
         for i in range(6):
-            draw_button(screen, platform[i], font_message, dark_blue, platform_buttons[i])
+            draw_button(screen, platform[i][0], font_message, dark_blue, platform_buttons[i])
         pygame.display.flip()
         clock.tick(30)
