@@ -194,7 +194,7 @@ def start(screen):
 
         screen.fill((154, 170, 217))
         dark_blue = pygame.Color(67, 45, 115)
-        draw_text(screen, "Welcome to IGDB Project!", font_title, (0, 0, 0), (25, 25))
+        draw_text(screen, "Welcome to GS Ultimate!", font_title, (0, 0, 0), (25, 25))
         draw_text(screen, "Please choose one of the following:", font_message, (0, 0, 0), (70, 80))
         pygame.draw.rect(screen, color, input_box, 2)
         draw_text(screen, text, font_message, (0, 0, 0), input_box.topleft)
