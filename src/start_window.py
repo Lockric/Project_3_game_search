@@ -28,7 +28,7 @@ def show_results_genre(genre):
     # Get the wrapper from the api key to recive the needed information, tuple here was needed to not add extra functions
     wrapper = get_wrapper()
     # Offset set to 100 as there are a lot of games that do have a rating as of yet
-    results = get_game_by_genre(wrapper, genre[1], 100)
+    results = get_game_by_genre(wrapper, genre[1], 50)
 
     # Need the while loop to loop into the main event with the mouse clicking and mouse scroll
     while not done:
@@ -76,7 +76,7 @@ def show_results_platform(platform):
 
     wrapper = get_wrapper()
     # Offset set to 100 as there are a lot of games that do have a rating as of yet
-    results = get_game_by_platform(wrapper, platform[1], 100)
+    results = get_game_by_platform(wrapper, platform[1], 50)
 
     while not done:
         for event in pygame.event.get():
