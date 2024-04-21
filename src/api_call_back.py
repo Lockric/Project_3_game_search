@@ -27,7 +27,7 @@ def get_game_by_name(wrapper, name, iter):
         for i in range (0, iter):
             byte_array = wrapper.api_request(
                 'games.pb',
-                f'fields id, name, rating; offset {next_offset}; where name="{name}";'
+                f'fields id, name, rating; offset {next_offset}; where name~"{name}";'
             )
             games_message.ParseFromString(byte_array)
             if not games_message.games:
@@ -38,7 +38,7 @@ def get_game_by_name(wrapper, name, iter):
         while True:
             byte_array = wrapper.api_request(
                 'games.pb',
-                f'fields id, name, rating; offset {next_offset}; where name="{name}";'
+                f'fields id, name, rating; offset {next_offset}; where name~"{name}";'
             )
             games_message.ParseFromString(byte_array)
             if not games_message.games:
