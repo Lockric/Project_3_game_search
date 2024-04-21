@@ -1,3 +1,5 @@
+# Used this file to create the merge sort https://www.w3schools.com/dsa/dsa_algo_mergesort.php
+
 def MergeSort(my_list, l, r):
     if l < r:
         # get mid point

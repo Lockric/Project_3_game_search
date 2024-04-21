@@ -6,6 +6,8 @@ from igdb.igdbapi_pb2 import GameResult
 from igdb.igdbapi_pb2 import PlatformResult
 from igdb.igdbapi_pb2 import GenreResult
 
+# Use this github repository to help with the calls to the api: https://github.com/twitchtv/igdb-api-python
+
 def get_wrapper():
     # information for accessing the data base
     ClientID = 'vmqipli3y2vhqnenur94vvzdk8eqhs'

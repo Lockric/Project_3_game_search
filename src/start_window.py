@@ -6,6 +6,8 @@ from api_call_back import *
 from heapsort import HeapSort
 from mergesort import MergeSort
 
+# For this file the reference is Project 4: Sudoku, COP3502. Based the window and buttons on that project
+
 # This function takes in the result for genre considering all the buttons for genre
 def show_results_genre(genre):
     # Set up the display with the fonts necessary

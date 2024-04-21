@@ -14,5 +14,10 @@ GS Ultimate is a program that can help gamers or those who wish to get into gami
      ```pip install request```
 
 **How to run**
+
 Run the following comamand line then procede to the window
 - ```python src/main.py```
+
+
+**Note:** To test another command just exit the window at the top right, then other commands can be tested without running the code again.
+
