@@ -1,5 +1,6 @@
 import pygame
 import pygame.freetype
+import time
 from display_functions import *
 
 from api_call_back import *
@@ -28,7 +29,10 @@ def show_results_genre(genre):
     # Get the wrapper from the api key to recive the needed information, tuple here was needed to not add extra functions
     wrapper = get_wrapper()
     # Offset set to 100 as there are a lot of games that do have a rating as of yet
-    results = get_game_by_genre(wrapper, genre[1], 50)
+    results = get_game_by_genre(wrapper, genre[1], 100)
+
+    heap_sort_time = 0
+    merge_sort_time = 0
 
     # Need the while loop to loop into the main event with the mouse clicking and mouse scroll
     while not done:
@@ -39,9 +43,15 @@ def show_results_genre(genre):
                 if heapsort_button.collidepoint(event.pos):
                     print("Heap Sort button clicked")
                     HeapSort(results)
+                    start_time = time.perf_counter()
+                    end_time = time.perf_counter()
+                    heap_sort_time = end_time - start_time
                 elif mergesort_button.collidepoint(event.pos):
                     print("Merge Sort button clicked")
                     MergeSort(results, 0, len(results) - 1)
+                    start_time = time.perf_counter()
+                    end_time = time.perf_counter()
+                    merge_sort_time = end_time - start_time
             elif event.type == pygame.MOUSEWHEEL:
                 if event.y > 0:  # scroll up
                     content_y = min(content_y + scroll_speed, 0)
@@ -53,9 +63,11 @@ def show_results_genre(genre):
         # Added the scrolling function here so that not all the window can be scrollable 
         build_string_results(result_screen, results, font_results, (255, 255, 255), (box.x + 5, box.y + content_y + 5))
         draw_box(result_screen, (154, 170, 217), box)
-        draw_text(result_screen, f"Results for {genre[0]}:", font_message, (0, 0, 0), (182, 50-15))
+        draw_text(result_screen, f"Results for {genre[0]}:", font_message, (0, 0, 0), (182, 40))
         draw_button(result_screen, "Heap Sort", font_message, (67, 45, 115), heapsort_button)
         draw_button(result_screen, "Merge Sort", font_message, (67, 45, 115), mergesort_button)
+        font_results.render_to(result_screen, (10, 10), f"Heap Sort took {heap_sort_time:.6f} seconds", (255, 255, 255))
+        font_results.render_to(result_screen, (10, 25), f"Merge Sort took {merge_sort_time:.6f} seconds", (255, 255, 255))
         pygame.display.flip()
         clock.tick(30)
 
@@ -76,7 +88,10 @@ def show_results_platform(platform):
 
     wrapper = get_wrapper()
     # Offset set to 100 as there are a lot of games that do have a rating as of yet
-    results = get_game_by_platform(wrapper, platform[1], 50)
+    results = get_game_by_platform(wrapper, platform[1], 100)
+
+    heap_sort_time = 0
+    merge_sort_time = 0
 
     while not done:
         for event in pygame.event.get():
@@ -86,9 +101,15 @@ def show_results_platform(platform):
                 if heapsort_button.collidepoint(event.pos):
                     print("Heap Sort button clicked")
                     HeapSort(results)
+                    start_time = time.time()
+                    end_time = time.time()
+                    heap_sort_time = end_time - start_time
                 elif mergesort_button.collidepoint(event.pos):
                     print("Merge Sort button clicked")
                     MergeSort(results, 0, len(results) - 1)
+                    start_time = time.time()
+                    end_time = time.time()
+                    merge_sort_time = end_time - start_time
             elif event.type == pygame.MOUSEWHEEL:
                 if event.y > 0:  # scroll up
                     content_y = min(content_y + scroll_speed, 0)
@@ -98,9 +119,11 @@ def show_results_platform(platform):
         result_screen.fill((81, 90, 115))
         build_string_results(result_screen, results, font_results, (255, 255, 255), (box.x + 5, box.y + content_y + 5))
         draw_box(result_screen, (154, 170, 217), box)
-        draw_text(result_screen, f"Results for {platform[0]}:", font_message, (0, 0, 0), (182, 50-15))
+        draw_text(result_screen, f"Results for {platform[0]}:", font_message, (0, 0, 0), (182, 40))
         draw_button(result_screen, "Heap Sort", font_message, (67, 45, 115), heapsort_button)
         draw_button(result_screen, "Merge Sort", font_message, (67, 45, 115), mergesort_button)
+        font_results.render_to(result_screen, (10, 10), f"Heap Sort took {heap_sort_time} seconds", (255, 255, 255))
+        font_results.render_to(result_screen, (10, 25), f"Merge Sort took {merge_sort_time} seconds", (255, 255, 255))
         pygame.display.flip()
         clock.tick(30)        
 
@@ -122,6 +145,8 @@ def show_results_name(name):
     results = get_game_by_name(wrapper, name, 5)
 
     # build array of result boxes
+    heap_sort_time = 0
+    merge_sort_time = 0
 
     while not done:
         for event in pygame.event.get():
@@ -131,16 +156,24 @@ def show_results_name(name):
                 if heapsort_button.collidepoint(event.pos):
                     print("Heap Sort button clicked")
                     HeapSort(results)
+                    start_time = time.time()
+                    end_time = time.time()
+                    heap_sort_time = end_time - start_time
                 elif mergesort_button.collidepoint(event.pos):
                     print("Merge Sort button clicked")
                     MergeSort(results, 0, len(results) - 1)
+                    start_time = time.time()
+                    end_time = time.time()
+                    merge_sort_time = end_time - start_time
 
         result_screen.fill((81, 90, 115))
         build_string_results(result_screen, results, font_results, (255, 255, 255), (25, 150))
         draw_box(result_screen, (154, 170, 217), box)
-        draw_text(result_screen, f"Results for {name}:", font_message, (0, 0, 0), (182, 50-15))
+        draw_text(result_screen, f"Results for {name}:", font_message, (0, 0, 0), (182, 40))
         draw_button(result_screen, "Heap Sort", font_message, (67, 45, 115), heapsort_button)
         draw_button(result_screen, "Merge Sort", font_message, (67, 45, 115), mergesort_button)
+        font_results.render_to(result_screen, (10, 10), f"Heap Sort took {heap_sort_time} seconds", (255, 255, 255))
+        font_results.render_to(result_screen, (10, 25), f"Merge Sort took {merge_sort_time} seconds", (255, 255, 255))
         pygame.display.flip()
         clock.tick(30)
 
