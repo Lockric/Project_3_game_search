@@ -42,14 +42,14 @@ def show_results_genre(genre):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if heapsort_button.collidepoint(event.pos):
                     print("Heap Sort button clicked")
-                    HeapSort(results)
                     start_time = time.perf_counter()
+                    HeapSort(results)
                     end_time = time.perf_counter()
                     heap_sort_time = end_time - start_time
                 elif mergesort_button.collidepoint(event.pos):
                     print("Merge Sort button clicked")
-                    MergeSort(results, 0, len(results) - 1)
                     start_time = time.perf_counter()
+                    MergeSort(results, 0, len(results) - 1)
                     end_time = time.perf_counter()
                     merge_sort_time = end_time - start_time
             elif event.type == pygame.MOUSEWHEEL:
@@ -100,15 +100,15 @@ def show_results_platform(platform):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if heapsort_button.collidepoint(event.pos):
                     print("Heap Sort button clicked")
+                    start_time = time.perf_counter()
                     HeapSort(results)
-                    start_time = time.time()
-                    end_time = time.time()
+                    end_time = time.perf_counter()
                     heap_sort_time = end_time - start_time
                 elif mergesort_button.collidepoint(event.pos):
                     print("Merge Sort button clicked")
+                    start_time = time.perf_counter()
                     MergeSort(results, 0, len(results) - 1)
-                    start_time = time.time()
-                    end_time = time.time()
+                    end_time = time.perf_counter()
                     merge_sort_time = end_time - start_time
             elif event.type == pygame.MOUSEWHEEL:
                 if event.y > 0:  # scroll up
@@ -139,6 +139,8 @@ def show_results_name(name):
     heapsort_button = pygame.Rect(137, 100-15, 150, 50)
     mergesort_button = pygame.Rect(313, 100-15, 150, 50)
     box = pygame.Rect(00, 00, 600, 145)
+    content_y = 0
+    scroll_speed = 100
 
     # Get the results from the API
     wrapper = get_wrapper()
@@ -155,16 +157,21 @@ def show_results_name(name):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if heapsort_button.collidepoint(event.pos):
                     print("Heap Sort button clicked")
+                    start_time = time.perf_counter()
                     HeapSort(results)
-                    start_time = time.time()
-                    end_time = time.time()
+                    end_time = time.perf_counter()
                     heap_sort_time = end_time - start_time
                 elif mergesort_button.collidepoint(event.pos):
                     print("Merge Sort button clicked")
+                    start_time = time.perf_counter()
                     MergeSort(results, 0, len(results) - 1)
-                    start_time = time.time()
-                    end_time = time.time()
+                    end_time = time.perf_counter()
                     merge_sort_time = end_time - start_time
+            elif event.type == pygame.MOUSEWHEEL:
+                if event.y > 0:  # scroll up
+                    content_y = min(content_y + scroll_speed, 0)
+                elif event.y < 0:  # scroll down
+                    content_y = max(content_y - scroll_speed, -(len(results) * 20 - 145))
 
         result_screen.fill((81, 90, 115))
         build_string_results(result_screen, results, font_results, (255, 255, 255), (25, 150))
