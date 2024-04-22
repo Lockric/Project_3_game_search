@@ -23,6 +23,15 @@ def get_game_by_name(wrapper, name, iter):
     gameList = []
     games_message = GameResult()
     next_offset = 0
+
+    byte_array = wrapper.api_request(
+        'games.pb',
+        f'search "{name}"; fields id, name, rating; limit {iter * 10}; offset 0; where rating > 0;'
+    )
+    games_message.ParseFromString(byte_array)
+    gameList.extend(games_message.games)
+
+    '''
     if iter >= 0:
         for i in range (0, iter):
             byte_array = wrapper.api_request(
@@ -45,62 +54,66 @@ def get_game_by_name(wrapper, name, iter):
                 break  # No more results, exit the loop
             gameList.extend(games_message.games)  # Add the new results to the list
             next_offset += 10  # Increase the offset for the next request
+    '''
     return gameList
 
 def get_game_by_genre(wrapper, genreId, iter):
     gameList = []
     games_message = GameResult()
     next_offset = 0
+
     if iter >= 0:
         for i in range (0, iter):
             byte_array = wrapper.api_request(
                 'games.pb',
-                f'fields id, name, rating, genres; offset {i}; where genres={genreId} & rating > 0;'
+                f'fields id, name, rating, genres; offset {i * 500}; limit 500; where genres={genreId} & rating > 0;'
             )
             games_message.ParseFromString(byte_array)
             if not games_message.games:
                 break  # No more results, exit the loop
             gameList.extend(games_message.games)  # Add the new results to the list
-            next_offset += 10  # Increase the offset for the next request
     else:
         while True:
             byte_array = wrapper.api_request(
                 'games.pb',
-                f'fields id, name, rating; offset {next_offset}; where genres={genreId} & rating > 0;'
+                f'fields id, name, rating, genres; offset {next_offset}; limit 500; where genres={genreId} & rating > 0;'
             )
             games_message.ParseFromString(byte_array)
             if not games_message.games:
                 break  # No more results, exit the loop
             gameList.extend(games_message.games)  # Add the new results to the list
-            next_offset += 10  # Increase the offset for the next request
+            next_offset += 10  # Increase the offset for the next request'''
+
+    print(len(gameList))
     return gameList
 
 def get_game_by_platform(wrapper, platId, iter):
     gameList = []
     games_message = GameResult()
     next_offset = 0
+
     if iter >= 0:
         for i in range (0, iter):
             byte_array = wrapper.api_request(
                 'games.pb',
-                f'fields id, name, rating; offset {next_offset}; where platforms={platId} & rating > 0;'
+                f'fields id, name, rating, genres; offset {i * 500}; limit 500; where platforms={platId} & rating > 0;'
             )
             games_message.ParseFromString(byte_array)
             if not games_message.games:
                 break  # No more results, exit the loop
             gameList.extend(games_message.games)  # Add the new results to the list
-            next_offset += 10  # Increase the offset for the next request
     else:
         while True:
             byte_array = wrapper.api_request(
                 'games.pb',
-                f'fields id, name, rating, genres; offset {next_offset}; where platforms={platId} & rating > 0;'
+                f'fields id, name, rating, genres; offset {next_offset}; limit 500; where platforms={platId} & rating > 0;'
             )
             games_message.ParseFromString(byte_array)
             if not games_message.games:
                 break  # No more results, exit the loop
             gameList.extend(games_message.games)  # Add the new results to the list
-            next_offset += 10  # Increase the offset for the next request
+            next_offsets += 500
+    print(len(gameList))
     return gameList
 
 def get_genre_list(wrapper):
