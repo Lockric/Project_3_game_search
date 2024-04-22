@@ -13,6 +13,10 @@ GS Ultimate is a program that can help gamers or those who wish to get into gami
 
      ```pip install request```
 
+4. Install time:
+
+     ```pip install time```
+
 **How to run**
 
 Run the following comamand line then procede to the window

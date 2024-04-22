@@ -66,8 +66,8 @@ def show_results_genre(genre):
         draw_text(result_screen, f"Results for {genre[0]}:", font_message, (0, 0, 0), (182, 40))
         draw_button(result_screen, "Heap Sort", font_message, (67, 45, 115), heapsort_button)
         draw_button(result_screen, "Merge Sort", font_message, (67, 45, 115), mergesort_button)
-        font_results.render_to(result_screen, (10, 10), f"Heap Sort took {heap_sort_time:.6f} seconds", (255, 255, 255))
-        font_results.render_to(result_screen, (10, 25), f"Merge Sort took {merge_sort_time:.6f} seconds", (255, 255, 255))
+        font_results.render_to(result_screen, (10, 10), f"Heap Sort took {heap_sort_time} seconds", (255, 255, 255))
+        font_results.render_to(result_screen, (10, 25), f"Merge Sort took {merge_sort_time} seconds", (255, 255, 255))
         pygame.display.flip()
         clock.tick(30)
 
